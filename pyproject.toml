@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phonecheck"
+version = "0.1.0"
+description = "Plug in an iPhone or Android phone and get its battery health and device stats in one command."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = ["rich>=13.0"]
+keywords = ["iphone", "android", "battery", "cycle-count", "adb", "libimobiledevice"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+phonecheck = "phonecheck.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

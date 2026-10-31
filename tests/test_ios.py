@@ -1,7 +1,7 @@
 import plistlib
 
-from phonecheck import ios, ios_models
-from phonecheck.models import EXCELLENT, GOOD, SERVICE, UNKNOWN, Battery
+from isitcooked import ios, ios_models
+from isitcooked.models import EXCELLENT, GOOD, SERVICE, UNKNOWN, Battery
 
 # Mirrors the structure a modern iPhone returns: capacities live under BatteryData and
 # AppleRawMaxCapacity is absent. Values are synthetic.

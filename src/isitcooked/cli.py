@@ -1,4 +1,4 @@
-"""Command-line entry point: `phonecheck`."""
+"""Command-line entry point: `isitcooked`."""
 
 from __future__ import annotations
 
@@ -16,15 +16,15 @@ from .models import OK
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        prog="phonecheck",
-        description="Plug in an iPhone or Android phone and get its battery health and device stats.",
+        prog="isitcooked",
+        description="IsItCooked: plug in an iPhone or Android phone and find out if its battery is cooked.",
     )
     p.add_argument("--json", action="store_true", help="print machine-readable JSON instead of the UI")
     p.add_argument("--reveal", action="store_true", help="show serials, IMEI, MAC addresses and phone numbers unmasked")
     p.add_argument("--watch", nargs="?", const=5, type=float, metavar="SECONDS", help="refresh continuously (default every 5s)")
     p.add_argument("--no-wait", action="store_true", help="do not wait for the Trust / Allow prompt on the phone")
     p.add_argument("--doctor", action="store_true", help="check that the required tools are installed")
-    p.add_argument("--version", action="version", version=f"phonecheck {__version__}")
+    p.add_argument("--version", action="version", version=f"IsItCooked {__version__}")
     return p
 
 

@@ -3,9 +3,9 @@ import json
 
 from rich.console import Console
 
-from phonecheck import jsonout, render
-from phonecheck.models import Battery, DeviceReport, ScanResult
-from phonecheck.redact import mask
+from isitcooked import jsonout, render
+from isitcooked.models import Battery, DeviceReport, ScanResult
+from isitcooked.redact import mask
 
 
 def make_report() -> DeviceReport:

@@ -230,7 +230,7 @@ def collect(serial: str, state: str = "device") -> DeviceReport:
     report = DeviceReport(platform="android", device_id=serial)
     if state == "unauthorized":
         report.state = UNAUTHORIZED
-        report.message = "Unlock the phone and tap 'Allow' on the USB debugging prompt, then run phonecheck again."
+        report.message = "Unlock the phone and tap 'Allow' on the USB debugging prompt, then run isitcooked again."
         return report
     if state == "offline":
         report.state = OFFLINE

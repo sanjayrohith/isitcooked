@@ -227,7 +227,7 @@ def device_view(d: DeviceReport, reveal: bool) -> RenderableType:
 
 def render_scan(console: Console, result: ScanResult, reveal: bool = False) -> None:
     console.print()
-    console.print(Text.assemble(("phonecheck", "bold cyan"), f"  v{__version__}", ("   phone health report", "dim")))
+    console.print(Text.assemble(("IsItCooked", "bold cyan"), f"  v{__version__}", ("   phone health report", "dim")))
     console.print()
 
     if not result.devices:
@@ -239,7 +239,7 @@ def render_scan(console: Console, result: ScanResult, reveal: bool = False) -> N
                     Text("iPhone   : unlock it, use a data-capable cable, tap “Trust” if asked."),
                     Text("Android  : enable Developer options → USB debugging, then tap “Allow”."),
                     Text(""),
-                    Text("Run `phonecheck --doctor` to check that the required tools are installed.", style="dim"),
+                    Text("Run `isitcooked --doctor` to check that the required tools are installed.", style="dim"),
                 ),
                 border_style="yellow",
                 padding=(1, 2),

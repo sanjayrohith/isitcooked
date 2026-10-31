@@ -35,7 +35,7 @@ def device_to_dict(d: DeviceReport, reveal: bool = False) -> Dict[str, Any]:
 
 def to_dict(result: ScanResult, reveal: bool = False) -> Dict[str, Any]:
     return {
-        "tool": "phonecheck",
+        "tool": "IsItCooked",
         "version": __version__,
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "identifiers_masked": not reveal,

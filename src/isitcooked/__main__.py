@@ -1,4 +1,4 @@
-from phonecheck.cli import main
+from isitcooked.cli import main
 
 if __name__ == "__main__":
     raise SystemExit(main())

@@ -10,7 +10,7 @@ from .tools import ToolError
 
 Status = Callable[[str], None]
 
-INSTALL_HINT = "Run the phonecheck installer again, or: brew install libimobiledevice && brew install --cask android-platform-tools"
+INSTALL_HINT = "Run the IsItCooked installer again, or: brew install libimobiledevice && brew install --cask android-platform-tools"
 
 
 def scan(on_status: Optional[Status] = None, wait_for_prompts: bool = True) -> ScanResult:

@@ -1,19 +1,19 @@
 #!/bin/sh
 #
-# phonecheck installer: one command installs the CLI plus the phone tools it needs.
+# IsItCooked installer: one command installs the CLI plus the phone tools it needs.
 #
 #   ./install.sh                                  (from a checkout)
 #   curl -fsSL <raw-url-of-this-file> | sh        (from anywhere)
 #
 # Environment:
-#   PHONECHECK_SKIP_SYSTEM=1   skip installing libimobiledevice / adb (just install the CLI)
-#   PHONECHECK_SOURCE=<path|pip-spec>   override what gets installed
+#   ISITCOOKED_SKIP_SYSTEM=1   skip installing libimobiledevice / adb (just install the CLI)
+#   ISITCOOKED_SOURCE=<path|pip-spec>   override what gets installed
 #
 set -eu
 
-REMOTE_SPEC="git+https://github.com/rnihesh/capax.git#subdirectory=phonecheck"
+REMOTE_SPEC="git+https://github.com/sanjayrohith/isitcooked.git"
 BIN_DIR="${HOME}/.local/bin"
-VENV_DIR="${HOME}/.phonecheck/venv"
+VENV_DIR="${HOME}/.isitcooked/venv"
 
 say()  { printf '\033[1;36m==>\033[0m %s\n' "$1"; }
 warn() { printf '\033[1;33m!!\033[0m  %s\n' "$1" >&2; }
@@ -57,7 +57,7 @@ install_system_tools() {
 
 # ---------------------------------------------------------------- the CLI itself
 pick_source() {
-  if [ -n "${PHONECHECK_SOURCE:-}" ]; then printf '%s' "$PHONECHECK_SOURCE"; return; fi
+  if [ -n "${ISITCOOKED_SOURCE:-}" ]; then printf '%s' "$ISITCOOKED_SOURCE"; return; fi
   dir="$(cd "$(dirname "$0")" 2>/dev/null && pwd || true)"
   if [ -n "$dir" ] && [ -f "$dir/pyproject.toml" ]; then printf '%s' "$dir"; else printf '%s' "$REMOTE_SPEC"; fi
 }
@@ -66,18 +66,21 @@ install_cli() {
   have python3 || die "python3 is required (3.9 or newer)."
   python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3, 9) else 1)' || die "Python 3.9 or newer is required."
   SRC="$(pick_source)"
-  case "$SRC" in git+*) have git || die "git is required to install from the repository." ;; esac
+  case "$SRC" in
+    *YOUR_USERNAME*) die "No local checkout found and the repository URL is not set. Run ./install.sh from the cloned folder, or set ISITCOOKED_SOURCE." ;;
+    git+*) have git || die "git is required to install from the repository." ;;
+  esac
 
   if have pipx; then
-    say "Installing phonecheck with pipx"
+    say "Installing IsItCooked with pipx"
     pipx install --force "$SRC"
   else
-    say "Installing phonecheck into ${VENV_DIR}"
+    say "Installing IsItCooked into ${VENV_DIR}"
     mkdir -p "$(dirname "$VENV_DIR")" "$BIN_DIR"
     python3 -m venv "$VENV_DIR"
     "$VENV_DIR/bin/python" -m pip install --quiet --upgrade pip
     "$VENV_DIR/bin/python" -m pip install --quiet --upgrade "$SRC"
-    ln -sf "$VENV_DIR/bin/phonecheck" "$BIN_DIR/phonecheck"
+    ln -sf "$VENV_DIR/bin/isitcooked" "$BIN_DIR/isitcooked"
   fi
 
   case ":${PATH}:" in
@@ -86,6 +89,6 @@ install_cli() {
   esac
 }
 
-[ "${PHONECHECK_SKIP_SYSTEM:-0}" = 1 ] || install_system_tools
+[ "${ISITCOOKED_SKIP_SYSTEM:-0}" = 1 ] || install_system_tools
 install_cli
-say "Done. Plug in your phone and run:  phonecheck"
+say "Done. Plug in your phone and run:  isitcooked"

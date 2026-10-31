@@ -1,4 +1,4 @@
-from phonecheck import android
+from isitcooked import android
 
 DEVICES = """* daemon not running; starting now at tcp:5037
 * daemon started successfully

@@ -200,7 +200,7 @@ def collect(udid: str) -> DeviceReport:
     except ToolError as e:
         if looks_like_trust_error(e.output):
             report.state = UNTRUSTED
-            report.message = "Unlock the iPhone and tap 'Trust This Computer', then run phonecheck again."
+            report.message = "Unlock the iPhone and tap 'Trust This Computer', then run isitcooked again."
         else:
             report.state = ERROR
             report.message = e.output or "Could not read device."
